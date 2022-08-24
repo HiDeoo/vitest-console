@@ -1,47 +1,18 @@
-import { vi } from 'vitest'
+import { type Matcher } from './matchers'
+import { toHaveLogged } from './matchers/toHaveLogged'
 
-import { type ConsoleMethods, DEFAULT_CONSOLE_METHODS } from './console'
+export { type ConsoleMock, type ConsoleMockOptions, mockConsole } from './libs/mock'
 
-export function mockConsole(methods?: ConsoleMethods): ConsoleMock
-export function mockConsole(options?: ConsoleMockOptions): ConsoleMock
-export function mockConsole(methods: ConsoleMethods, options: ConsoleMockOptions): ConsoleMock
-export function mockConsole(
-  methodsOrOptions?: ConsoleMethods | ConsoleMockOptions,
-  options?: ConsoleMockOptions
-): ConsoleMock {
-  const withMethods = Array.isArray(methodsOrOptions)
+export const matchers = { toHaveLogged }
 
-  const methods = withMethods ? methodsOrOptions : DEFAULT_CONSOLE_METHODS
-  const opts = withMethods ? options : methodsOrOptions
-
-  for (const method of methods) {
-    const spy = vi.spyOn(console, method)
-
-    if (opts?.quiet) {
-      spy.mockImplementation(() => undefined)
-    }
-  }
-
-  function clearConsole() {
-    for (const method of methods) {
-      vi.mocked(globalThis.console[method]).mockClear()
-    }
-  }
-
-  function restoreConsole() {
-    for (const method of methods) {
-      vi.mocked(globalThis.console[method]).mockRestore()
-    }
-  }
-
-  return { clearConsole, restoreConsole }
+export interface Matchers {
+  // TODO(HiDeoo)
+  toHaveLogged: Matcher<typeof toHaveLogged>
 }
 
-export interface ConsoleMock {
-  clearConsole: () => void
-  restoreConsole: () => void
-}
-
-export interface ConsoleMockOptions {
-  quiet?: boolean
+declare global {
+  namespace Vi {
+    interface Assertion extends Matchers {}
+    interface AsymmetricMatchersContaining extends Matchers {}
+  }
 }

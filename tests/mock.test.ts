@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest'
 
 import { mockConsole } from '../src'
-import { type ConsoleMethods, DEFAULT_CONSOLE_METHODS } from '../src/console'
+import { type ConsoleMethods, DEFAULT_CONSOLE_METHODS } from '../src/libs/console'
 
 test('should mock default console methods', () => {
   const { restoreConsole } = mockConsole({ quiet: true })

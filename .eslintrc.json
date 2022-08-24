@@ -2,7 +2,7 @@
   "extends": ["@hideoo"],
   "overrides": [
     {
-      "files": ["tests/**/*.*"],
+      "files": ["src/matchers/**/*.*", "tests/**/*.*"],
       "rules": {
         "no-console": "off"
       }
