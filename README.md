@@ -381,7 +381,7 @@ test('should test if the last warning was logged with a specific text and number
 
 ### toHaveNthWarnedWith
 
-Asserts that swarning were logged and that a specific one was logged with certain parameters.
+Asserts that warnings were logged and that a specific one was logged with certain parameters.
 
 The count starts at 1.
 
