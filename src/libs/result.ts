@@ -22,7 +22,7 @@ export function getResultWithArgs(
   if (!isEmptyDiff) {
     resultMessage = `${resultMessage} but received:
 
-${diffs.map((diff, callIndex) => `Call #${callIndex + 1}:\n\n${diff}`).join('\n')}`
+${diffs.map((diff, callIndex) => `${calls.length > 1 ? `Call #${callIndex + 1}:\n\n` : ''}${diff}`).join('\n')}`
   }
 
   return {

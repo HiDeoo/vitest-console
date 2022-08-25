@@ -3,6 +3,7 @@ import 'vitest'
 import { type ConsoleMethod } from '../libs/console'
 
 import { createToHaveMatcher } from './toHave'
+import { createToHaveLastWithMatcher } from './toHaveLastWith'
 import { createToHaveTimesMatcher } from './toHaveTimes'
 import { createToHaveWithMatcher } from './toHaveWith'
 
@@ -20,6 +21,7 @@ export function createMatchers() {
     matchers[`toHave${definition.name}`] = createToHaveMatcher(definition.method)
     matchers[`toHave${definition.name}Times`] = createToHaveTimesMatcher(definition.method)
     matchers[`toHave${definition.name}With`] = createToHaveWithMatcher(definition.method)
+    matchers[`toHaveLast${definition.name}With`] = createToHaveLastWithMatcher(definition.method)
   }
 
   return matchers
