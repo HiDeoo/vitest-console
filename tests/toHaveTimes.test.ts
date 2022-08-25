@@ -13,15 +13,16 @@ afterEach(clearConsole)
 afterAll(restoreConsole)
 
 const testDefinitions = MATCHERS_DEFINITIONS.map(
-  (definition) => [`toHave${definition.name}`, definition.method, console[definition.method]] as const
+  (definition) => [`toHave${definition.name}Times`, definition.method, console[definition.method]] as const
 )
 
 describe.each(testDefinitions)('%s', (matcher, method, consoleMethod) => {
   describe.each(TEST_ASSERTION_DEFINTIONS)('$name', ({ not }) => {
-    test(`should pass if console.${method} was ${not ? 'not ' : ''}called`, () => {
+    test(`should pass if console.${method} was ${not ? 'not ' : ''}called 2 times`, () => {
       expect(() => {
         if (!not) {
-          consoleMethod('test')
+          consoleMethod('test 1')
+          consoleMethod('test 2')
         }
 
         let assertion = expect(console)
@@ -30,11 +31,11 @@ describe.each(testDefinitions)('%s', (matcher, method, consoleMethod) => {
           assertion = assertion.not
         }
 
-        assertion[matcher]()
+        assertion[matcher](2)
       }).not.toThrowError()
     })
 
-    test(`should fail if console.${method} was ${!not ? 'not ' : ''}called`, () => {
+    test(`should fail if console.${method} was ${!not ? 'not ' : ''}called 3 times`, () => {
       expect(() => {
         if (not) {
           consoleMethod('test 1')
@@ -48,11 +49,11 @@ describe.each(testDefinitions)('%s', (matcher, method, consoleMethod) => {
           assertion = assertion.not
         }
 
-        assertion[matcher]()
+        assertion[matcher](3)
       }).toThrowError(
         not
-          ? `Expected 'console.${method}' to not be called at all but it was called 3 times`
-          : `Expected 'console.${method}' to be called at least once but it was called 0 times`
+          ? `Expected 'console.${method}' to not be called 3 times but it was called 3 times`
+          : `Expected 'console.${method}' to be called 3 times but it was called 0 times`
       )
     })
   })
