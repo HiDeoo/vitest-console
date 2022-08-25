@@ -1,6 +1,6 @@
 {
   "name": "vitest-console",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "description": "Quickly mock various console methods in Vitest and track their calls with custom matchers",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
