@@ -4,6 +4,7 @@ import { type ConsoleMethod } from '../libs/console'
 
 import { createToHaveMatcher } from './toHave'
 import { createToHaveLastWithMatcher } from './toHaveLastWith'
+import { createToHaveNthWithMatcher } from './toHaveNthWith'
 import { createToHaveTimesMatcher } from './toHaveTimes'
 import { createToHaveWithMatcher } from './toHaveWith'
 
@@ -22,6 +23,7 @@ export function createMatchers() {
     matchers[`toHave${definition.name}Times`] = createToHaveTimesMatcher(definition.method)
     matchers[`toHave${definition.name}With`] = createToHaveWithMatcher(definition.method)
     matchers[`toHaveLast${definition.name}With`] = createToHaveLastWithMatcher(definition.method)
+    matchers[`toHaveNth${definition.name}With`] = createToHaveNthWithMatcher(definition.method)
   }
 
   return matchers
