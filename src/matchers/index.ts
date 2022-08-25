@@ -1,6 +1,5 @@
-import 'vitest'
-
 import { type ConsoleMethod } from '../libs/console'
+import { type Result } from '../libs/result'
 
 import { createToHaveMatcher } from './toHave'
 import { createToHaveLastWithMatcher } from './toHaveLastWith'
@@ -15,7 +14,7 @@ export const MATCHERS_DEFINITIONS = [
   { method: 'warn', name: 'Warned' },
 ] as const
 
-export function createMatchers() {
+export function createMatchers(): RawMatchers {
   const matchers: RawMatchers = {}
 
   for (const definition of MATCHERS_DEFINITIONS) {
@@ -29,14 +28,13 @@ export function createMatchers() {
   return matchers
 }
 
-type RawMatcher = RawMatchers[string]
-type RawMatchers = Parameters<Vi.ExpectStatic['extend']>[0]
-
-export type Matcher<T extends (method: ConsoleMethod) => RawMatcher> = Parameters<ReturnType<T>> extends [
-  unknown,
-  ...infer U
-]
+export type Matcher<T extends (method: ConsoleMethod) => (...args: any[]) => unknown> = Parameters<
+  ReturnType<T>
+> extends [unknown, ...infer U]
   ? (...args: U) => void
   : () => void
 
 export type MatcherState = ReturnType<Vi.ExpectStatic['getState']>
+
+type RawMatcher = (this: MatcherState, received: Console, ...args: any[]) => Result
+export type RawMatchers = Record<string, RawMatcher>
