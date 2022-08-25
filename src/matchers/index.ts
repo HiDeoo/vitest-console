@@ -4,6 +4,7 @@ import { type ConsoleMethod } from '../libs/console'
 
 import { createToHaveMatcher } from './toHave'
 import { createToHaveTimesMatcher } from './toHaveTimes'
+import { createToHaveWithMatcher } from './toHaveWith'
 
 export const MATCHERS_DEFINITIONS = [
   { method: 'error', name: 'Errored' },
@@ -18,6 +19,7 @@ export function createMatchers() {
   for (const definition of MATCHERS_DEFINITIONS) {
     matchers[`toHave${definition.name}`] = createToHaveMatcher(definition.method)
     matchers[`toHave${definition.name}Times`] = createToHaveTimesMatcher(definition.method)
+    matchers[`toHave${definition.name}With`] = createToHaveWithMatcher(definition.method)
   }
 
   return matchers
