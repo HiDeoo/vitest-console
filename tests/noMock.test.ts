@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
-import { toHaveLogged } from '../src/matchers/toHaveLogged'
+import { createMatchers } from '../src/matchers'
 
-expect.extend({ toHaveLogged })
+expect.extend(createMatchers())
 
 test('should fail if the console is not mocked', () => {
   expect(() => {

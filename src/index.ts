@@ -1,13 +1,19 @@
-import { type Matcher } from './matchers'
-import { toHaveLogged } from './matchers/toHaveLogged'
+import { createMatchers, type Matcher } from './matchers'
+import { type createToHaveMatcher } from './matchers/toHave'
 
 export { type ConsoleMock, type ConsoleMockOptions, mockConsole } from './libs/mock'
 
-export const matchers = { toHaveLogged }
+export const matchers = createMatchers()
 
 export interface Matchers {
   // TODO(HiDeoo)
-  toHaveLogged: Matcher<typeof toHaveLogged>
+  toHaveErrored: Matcher<typeof createToHaveMatcher>
+
+  toHaveInformed: Matcher<typeof createToHaveMatcher>
+
+  toHaveLogged: Matcher<typeof createToHaveMatcher>
+
+  toHaveWarned: Matcher<typeof createToHaveMatcher>
 }
 
 declare global {
