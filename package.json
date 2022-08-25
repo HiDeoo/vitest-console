@@ -1,0 +1,67 @@
+{
+  "name": "vitest-console",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "Quickly mock various console methods in Vitest and track their calls with custom matchers",
+  "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild",
+    "test": "vitest",
+    "lint": "prettier -c . && eslint . --max-warnings=0 && tsc --noEmit",
+    "prepare": "husky install",
+    "prepublishOnly": "pnpm build"
+  },
+  "devDependencies": {
+    "@hideoo/eslint-config": "0.6.0",
+    "@hideoo/prettier-config": "0.1.1",
+    "@hideoo/tsconfig": "0.1.0",
+    "eslint": "8.22.0",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.3",
+    "prettier": "2.7.1",
+    "typescript": "4.7.4",
+    "unbuild": "0.8.9",
+    "vitest": "0.22.1"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "packageManager": "pnpm@7.9.4",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "vitest",
+    "test",
+    "mock",
+    "custom",
+    "matchers",
+    "console"
+  ],
+  "homepage": "https://github.com/HiDeoo/vitest-console",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HiDeoo/vitest-console.git"
+  },
+  "bugs": "https://github.com/HiDeoo/vitest-console/issues",
+  "prettier": "@hideoo/prettier-config",
+  "lint-staged": {
+    "**/*": "prettier -w -u --cache",
+    "**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --max-warnings=0"
+  }
+}
