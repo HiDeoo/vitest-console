@@ -393,6 +393,23 @@ test('should test if the second warning was logged with a specific text and numb
 })
 ```
 
+## Vitest matchers
+
+If needed, you can also use the built-in matchers from Vitest with mocks created using `vitest-console`.
+
+```ts
+import { expect, test } from 'vitest'
+import { mockConsole } from 'vitest-console'
+
+test('should test if a message was logged', () => {
+  const { restoreConsole } = mockConsole()
+
+  expect(console.log).toHaveBeenCalled()
+
+  restoreConsole()
+})
+```
+
 ## License
 
 Licensed under the MIT License, Copyright © HiDeoo.
