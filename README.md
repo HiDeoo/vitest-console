@@ -48,13 +48,16 @@ Install `vitest-console` with your favorite package manager:
 $ pnpm add -D vitest-console
 ```
 
-Add a setup file to your [Vitest configuration](https://vitest.dev/config/#configuration):
+Add a setup file to your [Vitest configuration](https://vitest.dev/config/#configuration) and inline the `vitest-console` module:
 
 ```ts
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
+    deps: {
+      inline: ['vitest-console'],
+    },
     setupFiles: ['tests-setup.ts'],
   },
 })
