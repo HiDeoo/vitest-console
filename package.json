@@ -2,7 +2,7 @@
   "name": "vitest-console",
   "version": "0.0.1",
   "license": "MIT",
-  "description": "",
+  "description": "Quickly mock various console methods in Vitest and track their calls with custom matchers",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
   "type": "module",
   "main": "./dist/index.mjs",
@@ -42,7 +42,17 @@
     "access": "public"
   },
   "sideEffects": false,
-  "keywords": [],
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "vitest",
+    "test",
+    "mock",
+    "custom",
+    "matchers",
+    "console"
+  ],
   "homepage": "https://github.com/HiDeoo/vitest-console",
   "repository": {
     "type": "git",
